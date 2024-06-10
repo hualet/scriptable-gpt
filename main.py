@@ -36,8 +36,8 @@ class MyAgent:
             },
         ]
 
-        self.fc_model = self.setup_fc_model()
-        self.v_model = self.setup_v_model()
+        self.setup_fc_model()
+        self.setup_v_model()
 
     def run(self, script_str):
         resp = self.fc_model.invoke(script_str)
@@ -55,10 +55,10 @@ class MyAgent:
             tools=self.tools,
             # function_call={"name": "open_website"},
         )
-        return model
+        self.fc_model = model
 
     def setup_v_model(self):
-        return None
+        self.v_model = None
 
 
 
