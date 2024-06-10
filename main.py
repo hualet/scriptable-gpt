@@ -1,14 +1,21 @@
 #!/usr/bin/env python
 
+import sys
 import subprocess
 
 from langchain_experimental.llms.ollama_functions import OllamaFunctions
 from langchain_core.messages import HumanMessage
 
+from PyQt6.QtCore import QUrl
+from PyQt6.QtWidgets import QApplication
+from PyQt6.QtWebEngineWidgets import QWebEngineView
+
+app = QApplication(sys.argv)
+w = QWebEngineView()
 
 def open_website(address):
     print("function open_website: ", address)
-    subprocess.call(["open", address])
+    w.load(QUrl(address))
 
 class MyAgent:
     def __init__(self ) -> None:
@@ -54,6 +61,7 @@ class MyAgent:
         return None
 
 
+
 if __name__ == "__main__":
     script = [
         "打开网址 https://oa.uniontech.com",
@@ -65,3 +73,6 @@ if __name__ == "__main__":
         print(f"User: {script_line}")
         response = agent.run(script_line)
         print(f"Assistant: {response}")
+
+    w.showMaximized()
+    app.exec()
